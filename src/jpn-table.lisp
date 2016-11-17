@@ -3,7 +3,7 @@
 ;;; jpn-table.lisp --- Unicode tables for Japanese encodings.
 ;;;
 
-(in-package #:babel-encodings)
+(in-package #:babel2-encodings)
 
 (defvar *cp932-only*
   '((#xFC4B #x9ED1)

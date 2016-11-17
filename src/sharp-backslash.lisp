@@ -24,7 +24,7 @@
 ;;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 ;;; DEALINGS IN THE SOFTWARE.
 
-(in-package #:babel)
+(in-package #:babel2)
 
 #-allegro
 (defun sharp-backslash-reader (original-reader stream char numarg)
@@ -34,7 +34,7 @@
              (digit-char-p (peek-char nil stream nil #\z) 16))
         ;; something better than READ would be nice here
         (let ((token (let ((*read-base* 16)) (read stream))))
-          (if (typep token 'babel-encodings::code-point)
+          (if (typep token 'babel2-encodings::code-point)
               (code-char token)
               (if *read-suppress*
                   nil

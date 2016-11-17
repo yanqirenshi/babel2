@@ -42,10 +42,11 @@
 ;;;   output streams
 ;;; - in-memory input/output streams?
 
-(in-package #:babel)
+(in-package #:babel2)
 
-(defpackage #:babel-streams
-  (:use #:common-lisp #:babel #:trivial-gray-streams #:alexandria)
+(defpackage #:babel2-streams
+  (:nicknames :b2-streams)
+  (:use #:common-lisp #:babel2 #:trivial-gray-streams #:alexandria)
   (:export
    #:in-memory-stream
    #:vector-output-stream
@@ -56,7 +57,7 @@
    #:with-output-to-sequence
    #:with-input-from-sequence))
 
-(in-package :babel-streams)
+(in-package :babel2-streams)
 
 (declaim (inline check-if-open check-if-accepts-octets
                  check-if-accepts-characters stream-accepts-characters?

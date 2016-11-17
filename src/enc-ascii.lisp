@@ -24,7 +24,7 @@
 ;;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 ;;; DEALINGS IN THE SOFTWARE.
 
-(in-package #:babel-encodings)
+(in-package #:babel2-encodings)
 
 (define-character-encoding :ascii
     "A 7-bit, fixed-width character encoding in which all

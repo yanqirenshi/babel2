@@ -24,7 +24,7 @@
 ;;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 ;;; DEALINGS IN THE SOFTWARE.
 
-(in-package #:babel-encodings)
+(in-package #:babel2-encodings)
 
 (define-character-encoding :ebcdic-us
     "An alleged character set used on IBM dinosaurs."

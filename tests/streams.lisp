@@ -24,10 +24,10 @@
 ;;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 ;;; DEALINGS IN THE SOFTWARE.
 
-(in-package #:babel-tests)
+(in-package #:babel2-tests)
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
-  (use-package :babel-streams))
+  (use-package :babel2-streams))
 
 (deftest in-memory-vector-stream
   (with-output-to-sequence (output)
