@@ -100,6 +100,8 @@
    #:list-character-encodings
    #:string-to-octets
    #:octets-to-string
+   #:string2octets
+   #:octets2string
    #:concatenate-strings-to-octets
    #:string-size-in-octets
    #:vector-size-in-chars

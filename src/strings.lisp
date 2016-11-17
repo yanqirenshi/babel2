@@ -234,6 +234,15 @@ shouldn't attempt to modify V."
           (funcall (decoder mapping) vector start new-end string 0)
           string)))))
 
+(defun octets2string (vector &key (start 0) end
+                               (errorp (not *suppress-character-coding-errors*))
+                               (encoding *default-character-encoding*))
+  (octets-to-string vector
+                    :start start
+                    :end end
+                    :errorp errorp
+                    :encoding encoding))
+
 (defun bom-vector (encoding use-bom)
   (check-type use-bom (member :default t nil))
   (the simple-vector
@@ -299,6 +308,20 @@ shouldn't attempt to modify V."
            (funcall (the function (encoder mapping))
                     string start end result bom-length)
            result))))))
+
+(defun string2octets (string &key (encoding *default-character-encoding*)
+                               (start 0) end (use-bom :default)
+                               (errorp (not *suppress-character-coding-errors*))
+                               (bad-code-value (char-code #\?)))
+  (handler-bind ((character-encoding-error
+                   #'(lambda (c)
+                       (declare (ignore c))
+                       (invoke-restart 'retry-code bad-code-value))))
+    (string-to-octets string
+                      :encoding encoding
+                      :start start :end end
+                      :use-bom use-bom
+                      :errorp errorp)))
 
 (defun concatenate-strings-to-octets (encoding &rest strings)
   "Optimized equivalent of
