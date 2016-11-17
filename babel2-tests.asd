@@ -1,8 +1,8 @@
 ;;;; -*- Mode: lisp; indent-tabs-mode: nil -*-
 ;;;
-;;; babel-streams.asd --- ASDF system definition for Babel streams.
+;;; babel2-tests.asd --- ASDF system definition for Babel unit tests.
 ;;;
-;;; Copyright (C) 2008, Attila Lendvai <attila.lendvai@gmail.com>
+;;; Copyright (C) 2007, Luis Oliveira  <loliveira@common-lisp.net>
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person
 ;;; obtaining a copy of this software and associated documentation
@@ -24,15 +24,19 @@
 ;;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 ;;; DEALINGS IN THE SOFTWARE.
 
-(defsystem :babel-streams
-  :description "Some useful streams based on Babel's encoding code"
-  :author ("Dr. Edmund Weitz"
-           "Attila Lendvai <attila.lendvai@gmail.com>")
-  :version "0.1.0"
-  :licence "MIT"
-  :depends-on (:babel :alexandria :trivial-gray-streams)
+(defsystem babel2-tests
+  :description "Unit tests for Babel."
+  :depends-on (babel2 hu.dwim.stefil)
   :components
-  ((:module "src"
+  ((:module "tests"
     :serial t
     :components
-    ((:file "streams")))))
+    ((:file "tests")))))
+
+(defmethod perform ((o test-op) (c (eql (find-system :babel2-tests))))
+  (funcall (intern (string '#:run) '#:babel2-tests)))
+
+(defmethod operation-done-p ((o test-op) (c (eql (find-system :babel2-tests))))
+  nil)
+
+;;; vim: ft=lisp et

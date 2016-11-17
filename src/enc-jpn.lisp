@@ -3,7 +3,7 @@
 ;;; enc-jpn.lisp --- Japanese encodings.
 ;;;
 
-(in-package #:babel-encodings)
+(in-package #:babel2-encodings)
 
 ;;;; helper functions
 (defvar *eucjp-to-ucs-hash* (make-hash-table))

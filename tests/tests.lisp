@@ -25,11 +25,11 @@
 ;;; DEALINGS IN THE SOFTWARE.
 
 (in-package #:cl-user)
-(defpackage #:babel-tests
-  (:use #:common-lisp #:babel #:babel-encodings #:hu.dwim.stefil)
+(defpackage #:babel2-tests
+  (:use #:common-lisp #:babel2 #:babel2-encodings #:hu.dwim.stefil)
   (:import-from #:alexandria #:ignore-some-conditions)
   (:export #:run))
-(in-package #:babel-tests)
+(in-package #:babel2-tests)
 
 (defun indented-format (level stream format-control &rest format-arguments)
   (let ((line-prefix (make-string level :initial-element #\Space)))
@@ -81,13 +81,13 @@ RESULT defaults to `*last-test-result*' and STREAM defaults to t"
                (indented-format 4 stream "~?" format-control format-arguments)))))))
 
 (defun run ()
-  (let ((test-run (without-debugging (babel-tests))))
+  (let ((test-run (without-debugging (babel2-tests))))
     (print test-run)
     (describe-failed-tests :result test-run)
     (values (zerop (length (hu.dwim.stefil::failure-descriptions-of test-run)))
             test-run)))
 
-(defsuite* (babel-tests :in root-suite))
+(defsuite* (babel2-tests :in root-suite))
 
 (defun ub8v (&rest contents)
   (make-array (length contents) :element-type '(unsigned-byte 8)
@@ -247,7 +247,7 @@ RESULT defaults to `*last-test-result*' and STREAM defaults to t"
 (defun test-file (name type)
   (let ((sys-pn (truename
                  (asdf:system-definition-pathname
-                  (asdf:find-system 'babel-tests)))))
+                  (asdf:find-system 'babel2-tests)))))
     (make-pathname :name name :type type
                    :directory (append (pathname-directory sys-pn)
                                       '("tests"))
@@ -867,7 +867,7 @@ RESULT defaults to `*last-test-result*' and STREAM defaults to t"
 
 ;;; RT: encoders and decoders were returning bogus values.
 (deftest encoder/decoder-retvals (encoding &optional (test-string "abc"))
-  (let* ((mapping (lookup-mapping babel::*string-vector-mappings* encoding))
+  (let* ((mapping (lookup-mapping babel2::*string-vector-mappings* encoding))
          (strlen (length test-string))
          ;; encoding
          (octet-precount (funcall (octet-counter mapping)
@@ -898,7 +898,7 @@ RESULT defaults to `*last-test-result*' and STREAM defaults to t"
           (ignore-some-conditions (character-encoding-error)
             (string-to-octets (string char) :encoding encoding)))))))
 
-#+enable-slow-babel-tests
+#+enable-slow-babel2-tests
 (deftest code-point-sweep-all-encodings ()
   (mapc #'code-point-sweep (list-character-encodings)))
 
@@ -911,6 +911,6 @@ RESULT defaults to `*last-test-result*' and STREAM defaults to t"
             (ignore-some-conditions (character-decoding-error)
               (octets-to-string (ub8v b1 b2 b3 b4) :encoding encoding))))))))
 
-#+enable-slow-babel-tests
+#+enable-slow-babel2-tests
 (deftest octet-sweep-all-encodings ()
   (mapc #'octet-sweep (list-character-encodings)))

@@ -1,6 +1,6 @@
 ;;;; -*- Mode: lisp; indent-tabs-mode: nil -*-
 ;;;
-;;; filename --- description
+;;; babel2.asd --- ASDF system definition for Babel.
 ;;;
 ;;; Copyright (C) 2007, Luis Oliveira  <loliveira@common-lisp.net>
 ;;;
@@ -24,4 +24,36 @@
 ;;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 ;;; DEALINGS IN THE SOFTWARE.
 
+(defsystem babel2
+  :description "Babel, a charset conversion library."
+  :author "Luis Oliveira <loliveira@common-lisp.net>"
+  :licence "MIT"
+  :depends-on (trivial-features alexandria)
+  :components
+  ((:module src
+    :serial t
+    :components
+    ((:file "packages")
+     (:file "encodings")
+     (:file "enc-ascii")
+     (:file "enc-ebcdic")
+     (:file "enc-ebcdic-int")
+     (:file "enc-iso-8859")
+     (:file "enc-unicode")
+     (:file "enc-cp1251")
+     (:file "enc-cp1252")
+     (:file "jpn-table")
+     (:file "enc-jpn")
+     (:file "enc-gbk")
+     (:file "enc-koi8")
+     (:file "external-format")
+     (:file "strings")
+     (:file "gbk-map")
+     (:file "sharp-backslash")))))
 
+(defmethod perform ((o test-op) (c (eql (find-system :babel2))))
+  (operate 'load-op :babel2-tests)
+  (operate 'test-op :babel2-tests))
+
+(defmethod operation-done-p ((o test-op) (c (eql (find-system :babel2))))
+  nil)

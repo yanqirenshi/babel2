@@ -24,7 +24,7 @@
 ;;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 ;;; DEALINGS IN THE SOFTWARE.
 
-(in-package #:babel-encodings)
+(in-package #:babel2-encodings)
 
 ;;;; Character Encodings
 
@@ -326,7 +326,7 @@ a CHARACTER-ENCONDING object, it is returned unmodified."
      (code-point-seq-getter 'string-get)
      (code-point-seq-type 'simple-unicode-string))
   (let ((encodings (ensure-list encodings))
-        (*package* (find-package :babel-encodings))
+        (*package* (find-package :babel2-encodings))
         (*print-case* :downcase))
     (pprint
      (macroexpand

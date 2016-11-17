@@ -24,7 +24,7 @@
 ;;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 ;;; DEALINGS IN THE SOFTWARE.
 
-(in-package #:babel)
+(in-package #:babel2)
 
 ;;; The usefulness of this string/octets interface of Babel's is very
 ;;; limited on Lisps with 8-bit characters which will in effect only

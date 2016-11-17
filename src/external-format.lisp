@@ -24,7 +24,7 @@
 ;;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 ;;; DEALINGS IN THE SOFTWARE.
 
-(in-package #:babel)
+(in-package #:babel2)
 
 (defvar *default-eol-style*
   #+windows :crlf
@@ -79,7 +79,7 @@ denoting a character encoding name or one of its aliases."
   (or (etypecase encoding
         (keyword
          (gethash encoding ht))
-        (babel-encodings::concrete-mapping
+        (babel2-encodings::concrete-mapping
          encoding)
         (character-encoding
          (gethash (enc-name encoding) ht))

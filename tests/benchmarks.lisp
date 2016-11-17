@@ -24,9 +24,9 @@
 ;;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 ;;; DEALINGS IN THE SOFTWARE.
 
-(defpackage #:babel-benchmarks
-  (:use #:cl #:babel))
-(in-package #:babel-benchmarks)
+(defpackage #:babel2-benchmarks
+  (:use #:cl #:babel2))
+(in-package #:babel2-benchmarks)
 
 (defun benchmark (enc file-name file-type &optional (n 100))
   (let* ((octets (read-test-file file-name file-type))
@@ -34,10 +34,10 @@
     (write-line ";; testing SB-EXT:STRING-TO-OCTETS")
     (time (loop repeat n do
                 (sb-ext:string-to-octets string :external-format enc)))
-    (write-line ";; testing BABEL:STRING-TO-OCTETS")
+    (write-line ";; testing BABEL2:STRING-TO-OCTETS")
     (time (loop repeat n do (string-to-octets string :encoding enc)))
     (write-line ";; testing SB-EXT:OCTETS-TO-STRING")
     (time (loop repeat n do
                 (sb-ext:octets-to-string octets :external-format enc)))
-    (write-line ";; testing BABEL:OCTETS-TO-STRING")
+    (write-line ";; testing BABEL2:OCTETS-TO-STRING")
     (time (loop repeat n do (octets-to-string octets :encoding enc)))))
