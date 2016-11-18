@@ -30,25 +30,27 @@
   :licence "MIT"
   :depends-on (trivial-features alexandria)
   :components
-  ((:module src
+  ((:module "src"
     :serial t
     :components
     ((:file "packages")
      (:file "types")
-     (:file "encodings/encodings")
-     (:file "encodings/enc-ascii")
-     (:file "encodings/enc-ebcdic")
-     (:file "encodings/enc-ebcdic-int")
-     (:file "encodings/enc-iso-8859")
-     (:file "encodings/enc-unicode")
-     (:file "encodings/enc-cp1251")
-     (:file "encodings/enc-cp1252")
-     (:file "encodings/jpn-table")
-     (:file "encodings/enc-jpn")
-     (:file "encodings/enc-gbk")
-     (:file "encodings/enc-koi8")
+     (:module "encodings"
+      :components
+      ((:file "encodings")
+       (:file "enc-ascii")
+       (:file "enc-ebcdic")
+       (:file "enc-ebcdic-int")
+       (:file "enc-iso-8859")
+       (:file "enc-unicode")
+       (:file "enc-cp1251")
+       (:file "enc-cp1252")
+       (:file "jpn-table")
+       (:file "enc-jpn")
+       (:file "enc-gbk")
+       (:file "enc-koi8")
+       (:file "gbk-map")))
      (:file "external-format")
-     (:file "encodings/gbk-map")
      (:file "strings")
      (:file "sharp-backslash")))))
 
