@@ -34,7 +34,7 @@
            #:unicode-string
            #:simple-unicode-string))
 
-(defpackage #:babel2-encodings
+(defpackage #:babel2.encodings
   (:nicknames :b2-encodings)
   (:use #:common-lisp
         #:alexandria
@@ -89,8 +89,8 @@
   (:use #:common-lisp
         #:alexandria
         #:babel2.types
-        #:babel2-encodings)
-  (:import-from #:babel2-encodings)
+        #:babel2.encodings)
+  (:import-from #:babel2.encodings)
   (:export
    ;; types
    #:unicode-char

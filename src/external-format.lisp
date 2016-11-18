@@ -75,7 +75,7 @@ denoting a character encoding name or one of its aliases."
   (or (etypecase encoding
         (keyword
          (gethash encoding ht))
-        (babel2-encodings::concrete-mapping
+        (babel2.encodings::concrete-mapping
          encoding)
         (character-encoding
          (gethash (enc-name encoding) ht))

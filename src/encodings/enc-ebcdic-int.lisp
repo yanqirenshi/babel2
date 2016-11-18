@@ -1,4 +1,4 @@
-(in-package #:babel2-encodings)
+(in-package #:babel2.encodings)
 
 (define-character-encoding :ebcdic-international
     "An 8-bit, fixed-width character encoding from IBM.")

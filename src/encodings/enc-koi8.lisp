@@ -24,7 +24,7 @@
 ;;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 ;;; DEALINGS IN THE SOFTWARE.
 
-(in-package #:babel2-encodings)
+(in-package #:babel2.encodings)
 
 (define-character-encoding :koi8-ru
     "An 8-bit, fixed-width character Russian encoding."

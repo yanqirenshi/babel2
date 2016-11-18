@@ -27,7 +27,7 @@
 ;;; This implementation is largely based on OpenMCL's l1-unicode.lisp
 ;;;   Copyright (C) 2006 Clozure Associates and contributors.
 
-(in-package #:babel2-encodings)
+(in-package #:babel2.encodings)
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (defconstant +repl+ #xfffd "Unicode replacement character code point.")

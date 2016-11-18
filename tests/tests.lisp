@@ -26,7 +26,7 @@
 
 (in-package #:cl-user)
 (defpackage #:babel2-tests
-  (:use #:common-lisp #:babel2 #:babel2-encodings #:hu.dwim.stefil)
+  (:use #:common-lisp #:babel2 #:babel2.encodings #:hu.dwim.stefil)
   (:import-from #:alexandria #:ignore-some-conditions)
   (:export #:run))
 (in-package #:babel2-tests)

@@ -27,7 +27,7 @@
 ;;; This implementation is largely based on OpenMCL's l1-unicode.lisp
 ;;;   Copyright (C) 2006 Clozure Associates and contributors.
 
-(in-package #:babel2-encodings)
+(in-package #:babel2.encodings)
 
 ;;; Typically, ISO-8859-* codes in the range #x00-#x9f map straight
 ;;; through, while codes #xa0-#xff select arbitrary Unicode characters

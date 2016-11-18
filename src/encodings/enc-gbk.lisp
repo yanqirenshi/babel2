@@ -24,7 +24,7 @@
 ;;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 ;;; DEALINGS IN THE SOFTWARE.
 
-(in-package #:babel2-encodings)
+(in-package #:babel2.encodings)
 
 ;; populated in gbk-map.lisp
 (defvar *gbk-unicode-mapping*)
