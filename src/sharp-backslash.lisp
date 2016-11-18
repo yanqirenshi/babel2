@@ -34,7 +34,7 @@
              (digit-char-p (peek-char nil stream nil #\z) 16))
         ;; something better than READ would be nice here
         (let ((token (let ((*read-base* 16)) (read stream))))
-          (if (typep token 'babel2.encodings::code-point)
+          (if (typep token 'code-point)
               (code-char token)
               (if *read-suppress*
                   nil

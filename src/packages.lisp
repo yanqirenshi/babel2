@@ -59,10 +59,12 @@
    #:ambiguous-encoding-p
    ;; concrete mappings
    #:instantiate-concrete-mappings
+   #:concrete-mapping
    #:encoder
    #:decoder
    #:octet-counter
    #:code-point-counter
+   #:code-point
    #:lookup-mapping
    #:with-simple-vector
    #:with-checked-simple-vector
