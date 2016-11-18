@@ -35,4 +35,4 @@
   ((:module "src"
     :serial t
     :components
-    ((:file "streams")))))
+    ((:file "streams/streams")))))

@@ -28,7 +28,8 @@
 
 (defpackage #:babel2-encodings
   (:nicknames :b2-encodings)
-  (:use #:common-lisp #:alexandria)
+  (:use #:common-lisp
+        #:alexandria)
   (:export
    ;; character encoding objects
    #:list-character-encodings
@@ -76,7 +77,9 @@
 
 (defpackage #:babel2
   (:nicknames :b2)
-  (:use #:common-lisp #:babel2-encodings #:alexandria)
+  (:use #:common-lisp
+        #:alexandria
+        #:babel2-encodings)
   (:import-from #:babel2-encodings)
   (:export
    ;; types
