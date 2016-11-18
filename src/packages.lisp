@@ -37,8 +37,12 @@
 (defpackage #:babel2.encodings
   (:nicknames :b2-encodings)
   (:use #:common-lisp
-        #:alexandria
-        #:babel2.types)
+        #:alexandria)
+  (:import-from #:babel2.types
+                #:eol-style
+                #:unicode-char
+                #:unicode-string
+                #:simple-unicode-string)
   (:export
    ;; character encoding objects
    #:list-character-encodings
@@ -91,6 +95,11 @@
   (:use #:common-lisp
         #:alexandria
         #:babel2.types)
+  (:import-from #:babel2.types
+                #:eol-style
+                #:unicode-char
+                #:unicode-string
+                #:simple-unicode-string)
   (:import-from #:babel2.encodings
                 #:instantiate-concrete-mappings
                 #:concrete-mapping
