@@ -37,8 +37,12 @@
 (defpackage #:babel2.encodings
   (:nicknames :b2-encodings)
   (:use #:common-lisp
-        #:alexandria
-        #:babel2.types)
+        #:alexandria)
+  (:import-from #:babel2.types
+                #:eol-style
+                #:unicode-char
+                #:unicode-string
+                #:simple-unicode-string)
   (:export
    ;; character encoding objects
    #:list-character-encodings
@@ -90,9 +94,46 @@
   (:nicknames :b2)
   (:use #:common-lisp
         #:alexandria
-        #:babel2.types
-        #:babel2.encodings)
-  (:import-from #:babel2.encodings)
+        #:babel2.types)
+  (:import-from #:babel2.types
+                #:eol-style
+                #:unicode-char
+                #:unicode-string
+                #:simple-unicode-string)
+  (:import-from #:babel2.encodings
+                #:instantiate-concrete-mappings
+                #:concrete-mapping
+                #:code-point
+                ;; TODO: Condition
+                #:character-coding-error
+                #:character-coding-error-encoding    ; accessor
+                #:character-coding-error-buffer      ; accessor
+                #:character-coding-error-position    ; accessor
+                #:character-decoding-error
+                #:character-decoding-error-octets    ; accessor
+                #:character-encoding-error
+                #:character-encoding-error-code      ; accessor
+                #:end-of-input-in-character
+                #:character-out-of-range
+                #:invalid-utf8-starter-byte
+                #:invalid-utf8-continuation-byte
+                #:overlong-utf8-sequence
+                #:retry-code
+                ;; TODO: Other
+                #:*default-character-encoding*
+                #:*suppress-character-coding-errors*
+                #:enc-name
+                #:character-encoding
+                #:enc-bom-encoding
+                #:octet-counter
+                #:octet-counter
+                #:enc-use-bom
+                #:encoder
+                #:decoder
+                #:code-point-counter
+                #:lookup-mapping
+                #:get-character-encoding
+                #:list-character-encodings)
   (:export
    ;; types
    #:unicode-char
