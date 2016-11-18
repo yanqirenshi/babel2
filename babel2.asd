@@ -34,6 +34,7 @@
     :serial t
     :components
     ((:file "packages")
+     (:file "types")
      (:file "encodings/encodings")
      (:file "encodings/enc-ascii")
      (:file "encodings/enc-ebcdic")
@@ -47,8 +48,8 @@
      (:file "encodings/enc-gbk")
      (:file "encodings/enc-koi8")
      (:file "external-format")
-     (:file "strings")
      (:file "encodings/gbk-map")
+     (:file "strings")
      (:file "sharp-backslash")))))
 
 (defmethod perform ((o test-op) (c (eql (find-system :babel2))))

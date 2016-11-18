@@ -26,10 +26,19 @@
 
 (in-package #:cl-user)
 
+(defpackage #:babel2.types
+  (:nicknames :b2.type)
+  (:use #:common-lisp)
+  (:export #:eol-style
+           #:unicode-char
+           #:unicode-string
+           #:simple-unicode-string))
+
 (defpackage #:babel2-encodings
   (:nicknames :b2-encodings)
   (:use #:common-lisp
-        #:alexandria)
+        #:alexandria
+        #:babel2.types)
   (:export
    ;; character encoding objects
    #:list-character-encodings
@@ -79,6 +88,7 @@
   (:nicknames :b2)
   (:use #:common-lisp
         #:alexandria
+        #:babel2.types
         #:babel2-encodings)
   (:import-from #:babel2-encodings)
   (:export
