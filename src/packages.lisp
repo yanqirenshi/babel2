@@ -26,10 +26,19 @@
 
 (in-package #:cl-user)
 
-(defpackage #:babel2-encodings
+(defpackage #:babel2.types
+  (:nicknames :b2.type)
+  (:use #:common-lisp)
+  (:export #:eol-style
+           #:unicode-char
+           #:unicode-string
+           #:simple-unicode-string))
+
+(defpackage #:babel2.encodings
   (:nicknames :b2-encodings)
   (:use #:common-lisp
-        #:alexandria)
+        #:alexandria
+        #:babel2.types)
   (:export
    ;; character encoding objects
    #:list-character-encodings
@@ -50,10 +59,12 @@
    #:ambiguous-encoding-p
    ;; concrete mappings
    #:instantiate-concrete-mappings
+   #:concrete-mapping
    #:encoder
    #:decoder
    #:octet-counter
    #:code-point-counter
+   #:code-point
    #:lookup-mapping
    #:with-simple-vector
    #:with-checked-simple-vector
@@ -79,8 +90,9 @@
   (:nicknames :b2)
   (:use #:common-lisp
         #:alexandria
-        #:babel2-encodings)
-  (:import-from #:babel2-encodings)
+        #:babel2.types
+        #:babel2.encodings)
+  (:import-from #:babel2.encodings)
   (:export
    ;; types
    #:unicode-char

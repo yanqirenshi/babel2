@@ -32,10 +32,6 @@
   "The end-of-line style used by external formats if none is
 explicitly given.  Depends on the OS the code is compiled on.")
 
-(deftype eol-style ()
-  "Possible end-of-line styles."
-  '(member :cr :lf :crlf))
-
 (defclass external-format ()
   ((encoding :initarg :encoding :reader external-format-encoding
              :type character-encoding)
@@ -79,7 +75,7 @@ denoting a character encoding name or one of its aliases."
   (or (etypecase encoding
         (keyword
          (gethash encoding ht))
-        (babel2-encodings::concrete-mapping
+        (concrete-mapping
          encoding)
         (character-encoding
          (gethash (enc-name encoding) ht))
