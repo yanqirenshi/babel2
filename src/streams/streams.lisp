@@ -45,17 +45,19 @@
 (in-package #:babel2)
 
 (defpackage #:babel2-streams
-  (:nicknames :b2-streams)
-  (:use #:common-lisp #:babel2 #:trivial-gray-streams #:alexandria)
-  (:export
-   #:in-memory-stream
-   #:vector-output-stream
-   #:vector-input-stream
-   #:make-in-memory-output-stream
-   #:make-in-memory-input-stream
-   #:get-output-stream-sequence
-   #:with-output-to-sequence
-   #:with-input-from-sequence))
+  (:nicknames :b2.streams)
+  (:use #:common-lisp
+        #:babel2
+        #:trivial-gray-streams
+        #:alexandria)
+  (:export #:in-memory-stream
+           #:vector-output-stream
+           #:vector-input-stream
+           #:make-in-memory-output-stream
+           #:make-in-memory-input-stream
+           #:get-output-stream-sequence
+           #:with-output-to-sequence
+           #:with-input-from-sequence))
 
 (in-package :babel2-streams)
 
