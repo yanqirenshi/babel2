@@ -18,3 +18,8 @@
 (deftype unicode-string ()
   "Alias for (VECTOR UNICODE-CHAR *)."
   '(vector unicode-char *))
+
+;;;; Utilities used in enc-*.lisp
+
+(defconstant +default-substitution-code-point+ #x1a
+  "Default ASCII substitution character code point used in case of an encoding/decoding error.")

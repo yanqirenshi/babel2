@@ -341,11 +341,6 @@ a CHARACTER-ENCONDING object, it is returned unmodified."
         :code-point-seq-type ,code-point-seq-type))))
   (values))
 
-;;;; Utilities used in enc-*.lisp
-
-(defconstant +default-substitution-code-point+ #x1a
-  "Default ASCII substitution character code point used in case of an encoding/decoding error.")
-
 ;;; We're converting between objects of the (UNSIGNED-BYTE 8) and
 ;;; (MOD #x110000) types which are aliased here to UB8 and CODE-POINT
 ;;; for convenience.

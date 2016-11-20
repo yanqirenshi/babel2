@@ -32,11 +32,13 @@
   (:export #:eol-style
            #:unicode-char
            #:unicode-string
-           #:simple-unicode-string))
+           #:simple-unicode-string
+           #:+default-substitution-code-point+))
 
 (defpackage #:babel2.conditions
   (:nicknames :b2.conditions)
-  (:use #:common-lisp)
+  (:use #:common-lisp
+        #:babel2.types)
   (:export #:*suppress-character-coding-errors*
            #:character-coding-error
            #:character-coding-error-buffer
