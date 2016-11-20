@@ -53,19 +53,6 @@ in 2 to 4 bytes."
   :bom-encoding #(#xef #xbb #xbf)
   :default-replacement #xfffd)
 
-(define-condition invalid-utf8-starter-byte (character-decoding-error)
-  ()
-  (:documentation "Signalled when an invalid UTF-8 starter byte is found."))
-
-(define-condition invalid-utf8-continuation-byte (character-decoding-error)
-  ()
-  (:documentation
-   "Signalled when an invalid UTF-8 continuation byte is found."))
-
-(define-condition overlong-utf8-sequence (character-decoding-error)
-  ()
-  (:documentation "Signalled upon overlong UTF-8 sequences."))
-
 (define-octet-counter :utf-8 (getter type)
   `(named-lambda utf-8-octet-counter (seq start end max)
      (declare (type ,type seq) (fixnum start end max))

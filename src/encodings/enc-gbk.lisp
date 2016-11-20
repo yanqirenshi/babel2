@@ -41,14 +41,6 @@ Chinese characters, used in the People's Republic of China."
   :max-units-per-char 4
   :literal-char-code-limit #x80)
 
-(define-condition invalid-gbk-byte (character-decoding-error)
-  ()
-  (:documentation "Signalled when an invalid GBK byte is found."))
-
-(define-condition invalid-gbk-character (character-encoding-error)
-  ()
-  (:documentation "Signalled when an invalid GBK character is found."))
-
 (define-octet-counter :gbk (getter type)
   `(lambda (seq start end max)
      (declare (type ,type seq) (fixnum start end max))

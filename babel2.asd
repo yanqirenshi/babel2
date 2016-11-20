@@ -35,6 +35,7 @@
     :components
     ((:file "packages")
      (:file "types")
+     (:file "conditions")
      (:module "encodings"
       :components
       ((:file "encodings")
