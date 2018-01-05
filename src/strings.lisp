@@ -1,29 +1,3 @@
-;;;; -*- Mode: lisp; indent-tabs-mode: nil -*-
-;;;
-;;; strings.lisp --- Conversions between strings and UB8 vectors.
-;;;
-;;; Copyright (C) 2007, Luis Oliveira  <loliveira@common-lisp.net>
-;;;
-;;; Permission is hereby granted, free of charge, to any person
-;;; obtaining a copy of this software and associated documentation
-;;; files (the "Software"), to deal in the Software without
-;;; restriction, including without limitation the rights to use, copy,
-;;; modify, merge, publish, distribute, sublicense, and/or sell copies
-;;; of the Software, and to permit persons to whom the Software is
-;;; furnished to do so, subject to the following conditions:
-;;;
-;;; The above copyright notice and this permission notice shall be
-;;; included in all copies or substantial portions of the Software.
-;;;
-;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-;;; EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-;;; MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-;;; NONINFRINGEMENT.  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-;;; HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-;;; WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-;;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-;;; DEALINGS IN THE SOFTWARE.
-
 (in-package #:babel2)
 
 ;;; The usefulness of this string/octets interface of Babel's is very
@@ -136,55 +110,8 @@ copy of VECTOR coerced to a simple-vector.  Therefore, you
 shouldn't attempt to modify V."
   #+sbcl
   `(sb-kernel:with-array-data ((,v ,vector) (,s ,start) (,e ,end))
-     ,@body)
-  #+(or cmu scl)
-  `(lisp::with-array-data ((,v ,vector) (,s ,start) (,e ,end))
-     ,@body)
-  #+openmcl
-  (with-unique-names (offset)
-    `(multiple-value-bind (,v ,offset)
-         (ccl::array-data-and-offset ,vector)
-       (let ((,s (+ ,start ,offset))
-             (,e (+ ,end ,offset)))
-         ,@body)))
-  #+allegro
-  (with-unique-names (offset)
-    `(excl::with-underlying-simple-vector (,vector ,v ,offset)
-       (let ((,e (+ ,end ,offset))
-             (,s (+ ,start ,offset)))
-         ,@body)))
-  ;; slow, copying implementation
-  #-(or sbcl cmu scl openmcl allegro)
-  (once-only (vector)
-    `(funcall (if (adjustable-array-p ,vector)
-                  #'call-with-array-data/copy
-                  #'call-with-array-data/fast)
-              ,vector ,start ,end
-              (lambda (,v ,s ,e) ,@body))))
+     ,@body))
 
-#-(or sbcl cmu scl openmcl allegro)
-(progn
-  ;; Stolen from f2cl.
-  (defun array-data-and-offset (array)
-    (loop with offset = 0 do
-          (multiple-value-bind (displaced-to index-offset)
-              (array-displacement array)
-            (when (null displaced-to)
-              (return-from array-data-and-offset
-                (values array offset)))
-            (incf offset index-offset)
-            (setf array displaced-to))))
-
-  (defun call-with-array-data/fast (vector start end fn)
-    (multiple-value-bind (data offset)
-        (array-data-and-offset vector)
-      (funcall fn data (+ offset start) (+ offset end))))
-
-  (defun call-with-array-data/copy (vector start end fn)
-    (funcall fn (replace (make-array (- end start) :element-type
-                                     (array-element-type vector))
-                         vector :start2 start :end2 end)
-             0 (- end start))))
 
 (defmacro with-checked-simple-vector (((v vector) (s start) (e end)) &body body)
   "Like WITH-SIMPLE-VECTOR but bound-checks START and END."

@@ -1,34 +1,3 @@
-;;;; -*- Mode: lisp; indent-tabs-mode: nil -*-
-;;;
-;;; streams.lisp --- Conversions between strings and UB8 vectors.
-;;;
-;;; Copyright (c) 2005-2007, Dr. Edmund Weitz. All rights reserved.
-;;; Copyright (c) 2008, Attila Lendvai. All rights reserved.
-;;;
-;;; Redistribution and use in source and binary forms, with or without
-;;; modification, are permitted provided that the following conditions
-;;; are met:
-;;;
-;;;   * Redistributions of source code must retain the above copyright
-;;;     notice, this list of conditions and the following disclaimer.
-;;;
-;;;   * Redistributions in binary form must reproduce the above
-;;;     copyright notice, this list of conditions and the following
-;;;     disclaimer in the documentation and/or other materials
-;;;     provided with the distribution.
-;;;
-;;; THIS SOFTWARE IS PROVIDED BY THE AUTHOR 'AS IS' AND ANY EXPRESSED
-;;; OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-;;; WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-;;; ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
-;;; DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-;;; DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
-;;; GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-;;; INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-;;; WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-;;; NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-;;; SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
 ;;; STATUS
 ;;;
 ;;; - in-memory output streams support binary/bivalent/character
@@ -92,10 +61,6 @@
    (external-format
     :initform (ensure-external-format *default-character-encoding*)
     :initarg :external-format :accessor external-format-of)
-   #+cmu
-   (open-p
-    :initform t :accessor in-memory-stream-open-p
-    :documentation "For CMUCL we have to keep track of this manually."))
   (:documentation "An IN-MEMORY-STREAM is a binary stream that reads octets
                    from or writes octets to a sequence in RAM."))
 
@@ -119,23 +84,11 @@
   (:documentation "An IN-MEMORY-INPUT-STREAM is a binary stream that reads
                    octets from a sequence in RAM."))
 
-#+cmu
-(defmethod output-stream-p ((stream in-memory-input-stream))
-  "Explicitly states whether this is an output stream."
-  (declare (optimize speed))
-  nil)
-
 (defclass in-memory-output-stream (in-memory-stream
                                    fundamental-binary-output-stream)
   ()
   (:documentation "An IN-MEMORY-OUTPUT-STREAM is a binary stream that
                    writes octets to a sequence in RAM."))
-
-#+cmu
-(defmethod input-stream-p ((stream in-memory-output-stream))
-  "Explicitly states whether this is an input stream."
-  (declare (optimize speed))
-  nil)
 
 (defun make-in-memory-output-stream (&key (element-type :default)
                                      external-format
@@ -231,20 +184,6 @@ contains the octes that were actually output."
   (error 'wrong-element-type-stream-error
          :stream stream :expected-type expected-type))
 
-#+cmu
-(defmethod open-stream-p ((stream in-memory-stream))
-  "Returns a true value if STREAM is open.  See ANSI standard."
-  (declare (optimize speed))
-  (in-memory-stream-open-p stream))
-
-#+cmu
-(defmethod close ((stream in-memory-stream) &key abort)
-  "Closes the stream STREAM.  See ANSI standard."
-  (declare (ignore abort) (optimize speed))
-  (prog1
-      (in-memory-stream-open-p stream)
-    (setf (in-memory-stream-open-p stream) nil)))
-
 (defun check-if-open (stream)
   "Checks if STREAM is open and signals an error otherwise."
   (declare (optimize speed))
@@ -270,11 +209,6 @@ contains the octes that were actually output."
            (incf (vector-stream-index stream))
            (aref (vector-stream-vector stream) index))
           (t :eof))))
-
-#+#:ignore
-(defmethod stream-read-char ((stream vector-input-stream))
-  ;; TODO
-  )
 
 (defmethod stream-listen ((stream vector-input-stream))
   "Checking whether INDEX is beyond END."
