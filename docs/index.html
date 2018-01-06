@@ -8,13 +8,21 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
 
         <script src="./datas/symbols.js"></script>
+
+        <script src="./libs/riot.min.js"></script>
+        <script src="https://rawgit.com/riot/route/master/dist/route.min.js"></script>
+        <script src="./js/tags.js"></script>
     </head>
     <body>
-
         <app></app>
 
-        <script type="riot/tag" src="app.tag"></script>
-        <script src="https://cdn.jsdelivr.net/npm/riot@3.7/riot+compiler.min.js"></script>
-        <script>riot.mount('*')</script>
+        <script>
+         route(function(rest) {
+             console.log(arguments.length);
+         })
+         route.start();
+
+         riot.mount('*');
+        </script>
     </body>
 </html>
