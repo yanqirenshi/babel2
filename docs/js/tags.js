@@ -19,5 +19,14 @@ riot.tag2('home-tabs', '<app-section> <div class="tabs"> <ul> <li class="is-acti
 riot.tag2('home', '<home-tabs></home-tabs> <app-section> <symbol-list symbols="{_SYMBOLS}"></symbol-list> </app-section>', '', '', function(opts) {
 });
 
-riot.tag2('symbols', '', '', '', function(opts) {
+riot.tag2('generic-function_stream-element-type', '', '', '', function(opts) {
+});
+
+riot.tag2('symbols-home', '<app-section> <symbol-list></symbol-list> </app-section>', '', '', function(opts) {
+});
+
+riot.tag2('symbols-unit', '<app-section> </app-section>', '', '', function(opts) {
+});
+
+riot.tag2('symbols', '<symbols-home></symbols-home> <symbols-unit></symbols-unit>', '', '', function(opts) {
 });
